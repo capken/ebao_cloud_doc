@@ -123,6 +123,8 @@ HTTP请求路径：**/pa_web/api/policies/quotations?accessKey=[ACCESS_KEY]&sign
 
 HTTP请求方法：**POST**
 
+HTTP请求内容类型：**application/json**
+
 HTTP请求内容：
 
 ```
@@ -209,14 +211,58 @@ HTTP请求内容：
 | factor_table | key-value | 被保对象相关的风险因子 |
 | componentSelection | key-value | 产品结构中选中的节点（Coverage或Coverage Group） |
 
+询价的返回结果：
+
+```
+{
+  "fee": {
+    "COMMISSION": 0,
+    "APP": 30,
+    "AGP": 30,
+    "SNP": 30,
+    "ANP": 30,
+    "SGP": 30
+  },
+  "quotationNumber": "Q1507160000000010"
+}
+```
+
+| 属性  | 类型 | 说明 |
+|:------------ |:---------------|:-----|
+| quotationNumber | 字符串 | 询价结果的单号 |
+| fee | key-value | 询价的费用结果 |
+
+其中 fee 的属性说明
+
+| 属性  | 类型 | 说明 |
+|:------------ |:---------------|:-----|
+| COMMISSION | 数字 | 佣金 |
+| APP | 数字 | 实际应付保费 |
+| AGP | 数字 | 调整后的毛保费 |
+| SNP | 数字 | 标准净保费 |
+| ANP | 数字 | 调整后的净保费 |
+| SGP | 数字 | 标准毛保费 |
+
 ### 出单
 
 HTTP请求路径：**/pa_web/api/policies/issuances?accessKey=[ACCESS_KEY]&signature=[SIGNATURE]**
 
 HTTP请求方法：**POST**
 
+HTTP请求内容类型：**application/json**
+
 HTTP请求内容：出单请求内容和询价一致
 
+出单的返回结果
+
+```
+{
+  "policyNumber": "PVeh_Owner_GuardA_TP15000000000106"
+}
+```
+
+| 属性  | 类型 | 说明 |
+|:------------ |:---------------|:-----|
+| policyNumber | 字符串 | 出单后的保单号 |
+
 ### 退保
-
-
