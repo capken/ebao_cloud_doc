@@ -7,7 +7,7 @@
 
 ## 快速入门
 
-ebao cloud目前所有的web服务API基于HTTP协议，同时使用JSON的格式封装请求与返回的数据内容。开发者在使用所有的Web服务API之前需要申请开发者的access key和secrect key。这两个key用于对API的请求进行签名，以及返回消息的签名验证。有关签名的规则请参考“Web服务API的签名规则”部分。
+ebao cloud目前所有的web服务API基于HTTP协议，同时使用JSON的格式封装请求与返回的数据内容。开发者在使用所有的Web服务API之前需要申请开发者的access key和secret key。这两个key用于对API的请求进行签名，以及返回消息的签名验证。有关签名的规则请参考“Web服务API的签名规则”部分。
 
 以下通过使用保单询价的API为示例介绍API的请求的基本步骤，有关询价API的具体细节可以参考“开放的Web服务API”部分对询价API的说明。
 
@@ -99,21 +99,21 @@ Date: Thu, 16 Jul 2015 03:15:45 GMT
 
 开发者需要利用编程语言相应的HTTP函数库，对询价的请求数据内容进行封装，发送请求到ebao cloud的Web服务API的应用服务器。
 
-在询价API的请求URL中添加了ccessKey和signature两个参数。accessKey是开发者身份的唯一标识，而signature是结合secrect key对请求内容进行签名的结果。应用服务器接收到询价API的请求后，首先利用access key和signature对请求内容进行签名验证，以此保证请求发送方为access key的合法持有者，以及请求内容在传输过程中没有被篡改。
+在询价API的请求URL中添加了accessKey和signature两个参数。accessKey是开发者身份的唯一标识，而signature是结合secret key对请求内容进行签名的结果。应用服务器接收到询价API的请求后，首先利用access key和signature对请求内容进行签名验证，以此保证请求发送方为access key的合法持有者，以及请求内容在传输过程中没有被篡改。
 
-在签名验证后，应用服务器会将请求路由到对应的服务API处理具体的业务请求。对于返回的业务请求结果，应用服务器对利用开发者的secrect key对内容进行签名，并将签名的结果放到HTTP的Response Header中，开发者在获得返回结果后需要对返回的内容进行签名验证，以此保证应用服务器返回的内容未被篡改。在验证成功后，开发者根据业务需求对返回的结果进行相应的处理。
+在签名验证后，应用服务器会将请求路由到对应的服务API处理具体的业务请求。对于返回的业务请求结果，应用服务器对利用开发者的secret key对内容进行签名，并将签名的结果放到HTTP的Response Header中，开发者在获得返回结果后需要对返回的内容进行签名验证，以此保证应用服务器返回的内容未被篡改。在验证成功后，开发者根据业务需求对返回的结果进行相应的处理。
 
 ## Web服务API的签名规则
 
 所有Web服务API的基本签名规则是如下：
 
-1. 获得accessKey对应的secrect key。
-2. 将需要签名的内容和secrect key进行字符串拼接。
+1. 获得accessKey对应的secret key。
+2. 将需要签名的内容和secret key进行字符串拼接。
 3. 对于拼接后的内容使用MD5算法进行签名运算。
 
-对于开发者在发送HTTP POST请求之前，需要对HTTP Body的内容与secrect key进行字符串拼接，然后进行MD5运算，运算的结果再添加到请求URL的signature参数上。对于应用服务器在接收到请求后，完成与开发者相同的步骤获取签名的结果，然后将结果与请求URL的signature进行比较。
+对于开发者在发送HTTP POST请求之前，需要对HTTP Body的内容与secret key进行字符串拼接，然后进行MD5运算，运算的结果再添加到请求URL的signature参数上。对于应用服务器在接收到请求后，完成与开发者相同的步骤获取签名的结果，然后将结果与请求URL的signature进行比较。
 
-应用服务器从相应的服务API获得请求的结果后，对要返回的内容与开发者的secrect key进行字符串拼接，然后进行MD5运算，并将运算的结果添加到HTTP Reponse的Header中。开发者从应用服务器获得返回结果后，完成与应用服务器相同的步骤来验证HTTP Response Header中signature的有效性。
+应用服务器从相应的服务API获得请求的结果后，对要返回的内容与开发者的secret key进行字符串拼接，然后进行MD5运算，并将运算的结果添加到HTTP Reponse的Header中。开发者从应用服务器获得返回结果后，完成与应用服务器相同的步骤来验证HTTP Response Header中signature的有效性。
 
 ## 目前开放的Web服务API
 
@@ -133,6 +133,7 @@ HTTP请求内容：
   "productId": "UbwoOpjMjt:1",
   "effectiveDate": "2015-07-16T03:07:53.970Z",
   "expiredDate": "2016-07-15T03:07:53.970Z",
+  "CBC_Flag": "Y",
   "campaigns": [
     {
       "code": "campaign_1",
@@ -190,6 +191,7 @@ HTTP请求内容：
 | productId | 字符串 | 需要询价的产品ID |
 | effectiveDate | 字符串 | 保单生效期 |
 | expiredDate | 字符串 | 保单失效期 |
+| CBC_Flag | 字符串 | 是否见费出单（Y:是，N:否） |
 | campaigns | 数组 | 选中的优惠活动 |
 | policyHolder | key-value | 保单持有人相关信息 |
 | policyInsuredPeople | 数组 | 所有的被保险人的相关信息 |
@@ -311,7 +313,7 @@ HTTP请求内容：
 | policyNumber | 字符串 | 保单号 |
 | effectiveDate | 字符串 | 退保起始日期 |
 | applicationDate | 字符串 | 退保申请日期 |
-| applicationType | 字符串 | 退保类型 |
+| applicationType | 字符串 | 退保申请类型（APLY_BY_INSURER:由保险公司申请，APLY_BY_POLICY_HOLDER:由投保人申请，APLY_BY_UNDERWRITER:由核保专员申请）|
 
 
 退保的返回结果
