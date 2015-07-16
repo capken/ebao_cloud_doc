@@ -266,3 +266,40 @@ HTTP请求内容：出单请求内容和询价一致
 | policyNumber | 字符串 | 出单后的保单号 |
 
 ### 退保
+
+HTTP请求路径：**/pa_web/api/endorsement/cancellation?accessKey=[ACCESS_KEY]&signature=[SIGNATURE]**
+
+HTTP请求方法：**POST**
+
+HTTP请求内容类型：**application/json**
+
+HTTP请求内容：
+
+```
+{
+  "policyNumber": "P106_B2C15000000003101",
+  "effectiveDate": "2015-01-01T07:31:29.738Z",
+  "applicationDate": "2015-01-01T07:31:29.738Z",
+  "applicationType": "APLY_BY_INSURER"
+}
+```
+
+| 属性  | 类型 | 说明 |
+|:------------ |:---------------|:-----|
+| policyNumber | 字符串 | 保单号 |
+| effectiveDate | 字符串 | 退保起始日期 |
+| applicationDate | 字符串 | 退保申请日期 |
+| applicationType | 字符串 | 退保类型 |
+
+
+退保的返回结果
+```
+{
+  "endorsement_number": "E1506160000000003",
+  "success": true
+}
+```
+
+| 属性  | 类型 | 说明 |
+|:------------ |:---------------|:-----|
+| endorsement_number | 字符串 | 退保单号 |
