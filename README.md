@@ -20,7 +20,7 @@ Content-Type: application/json
 Cache-Control: no-cache
 
 {
-  "channelCode": 100003,
+  "channelCode": "AXA_TP",
   "productId": "UbwoOpjMjt:1",
   "effectiveDate": "2015-07-16T03:07:53.970Z",
   "expiredDate": "2016-07-15T03:07:53.970Z",
@@ -127,7 +127,7 @@ HTTP请求内容：
 
 ```
 {
-  "channelCode": 100003,
+  "channelCode": "AXA_TP",
   "productId": "UbwoOpjMjt:1",
   "effectiveDate": "2015-07-16T03:07:53.970Z",
   "expiredDate": "2016-07-15T03:07:53.970Z",
@@ -184,15 +184,39 @@ HTTP请求内容：
 
 | 属性  | 类型 | 说明 |
 |:------------ |:---------------|:-----|
-| channelId | 整型 | 渠道的ID |
+| channelCode | 字符串 | 渠道的Code |
 | productId | 字符串 | 需要询价的产品ID |
 | effectiveDate | 字符串 | 保单生效期 |
 | expiredDate | 字符串 | 保单失效期 |
-| campaigns | 数组 | 选择的折扣活动 |
-| factor_table | key-value | 询价所需的风险因子 |
-| insuredObjects | 数组 | 所有的被保对象 |
+| campaigns | 数组 | 选中的优惠活动 |
+| policyHolder | key-value | 保单持有人相关信息 |
+| policyInsuredPeople | 数组 | 所有的被保险人的相关信息 |
+| insuredObjects | 数组 | 所有的被保对象的相关信息 |
+
+其中 campaigns 中每个对象的相关属性
+
+| 属性  | 类型 | 说明 |
+|:------------ |:---------------|:-----|
+| code | 字符串 | 优惠活动的Code |
+| voucher | 字符串 | 优惠码 |
+
+其中 insuredObjects 中每个对象的相关属性
+
+| 属性  | 类型 | 说明 |
+|:------------ |:---------------|:-----|
+| type | 字符串 | 被保对象的类型 |
+| plan_code | 字符串 | 被保对象选中的保险计划代码 |
+| factor_table | key-value | 被保对象相关的风险因子 |
+| componentSelection | key-value | 产品结构中选中的节点（Coverage或Coverage Group） |
 
 ### 出单
+
+HTTP请求路径：**/pa_web/api/policies/issuances?accessKey=[ACCESS_KEY]&signature=[SIGNATURE]**
+
+HTTP请求方法：**POST**
+
+HTTP请求内容：出单请求内容和询价一致
+
 ### 退保
 
 
