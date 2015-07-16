@@ -63,13 +63,12 @@ Cache-Control: no-cache
         "AOA_unitType_PEFF_G": "件",
         "AOA_maxUnitAmount_PEFF_G": 2000
       },
-      "selection": {
-        "a58df1a5-1c80-441b-bd5b-7cb29418bfbe": true,
-        "8ddfce37-0e63-4039-beb3-9f62b7bfcd91": true,
-        "3ccb2ffd-cf17-4887-ac5f-1e5ed75d3216": true,
-        "83e39830-02a9-4f5e-9cf8-e211ad0cb4a6": true,
-        "28e8b1fe-4826-4db3-9279-d2379bf0b1ad": true,
-        "70d7a4e7-02e8-4321-98b9-5edc63f87a2e": true
+      "componentSelection": {
+        "Veh_Owner_Guard": true,
+        "ACC_BUR_WEB": true,
+        "ACC_DEATH": true,
+        "ACC_DIS": true,
+        "ACC_BURN": true
       }
     }
   ]
@@ -171,13 +170,12 @@ HTTP请求内容：
         "AOA_unitType_PEFF_G": "件",
         "AOA_maxUnitAmount_PEFF_G": 2000
       },
-      "selection": {
-        "a58df1a5-1c80-441b-bd5b-7cb29418bfbe": true,
-        "8ddfce37-0e63-4039-beb3-9f62b7bfcd91": true,
-        "3ccb2ffd-cf17-4887-ac5f-1e5ed75d3216": true,
-        "83e39830-02a9-4f5e-9cf8-e211ad0cb4a6": true,
-        "28e8b1fe-4826-4db3-9279-d2379bf0b1ad": true,
-        "70d7a4e7-02e8-4321-98b9-5edc63f87a2e": true
+      "componentSelection": {
+        "Veh_Owner_Guard": true,
+        "ACC_BUR_WEB": true,
+        "ACC_DEATH": true,
+        "ACC_DIS": true,
+        "ACC_BURN": true
       }
     }
   ]
