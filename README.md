@@ -30,23 +30,24 @@ Cache-Control: no-cache
       "voucher": "abcdef"
     }
   ],
-  "factorTable": {
-    "P040": "2",
-    "P041": "沪A6U615",
+  "policyHolder": {
     "PH001": "Shop.Zhang",
     "PH005": 1,
     "PH006": "132456199001011234",
     "PH015": "Shop.Zhang@123.com",
     "PH013": "15710023568",
-    "PH003": "1990-01-01T00:00:00.000Z",
-    "PL009": "NO_FREE_INSURANCE",
-    "ISP001": "Shop.Zhang",
-    "ISP004": "1",
-    "ISP005": "132456199001011234",
-    "ISP012": "Shop.Zhang@123.com",
-    "ISP011": "15710023568",
-    "ISP003": "1990-01-01T00:00:00.000Z"
+    "PH003": "1990-01-01T00:00:00.000Z"
   },
+  "policyInsuredPeople": [
+    {
+      "ISP001": "Shop.Zhang",
+      "ISP004": "1",
+      "ISP005": "132456199001011234",
+      "ISP012": "Shop.Zhang@123.com",
+      "ISP011": "15710023568",
+      "ISP003": "1990-01-01T00:00:00.000Z"
+    }
+  ],
   "insuredObjects": [
     {
       "name": "标的相关信息",
@@ -137,23 +138,24 @@ HTTP请求内容：
       "voucher": "abcdef"
     }
   ],
-  "factorTable": {
-    "P040": "2",
-    "P041": "沪A6U615",
+  "policyHolder": {
     "PH001": "Shop.Zhang",
     "PH005": 1,
     "PH006": "132456199001011234",
     "PH015": "Shop.Zhang@123.com",
     "PH013": "15710023568",
-    "PH003": "1990-01-01T00:00:00.000Z",
-    "PL009": "NO_FREE_INSURANCE",
-    "ISP001": "Shop.Zhang",
-    "ISP004": "1",
-    "ISP005": "132456199001011234",
-    "ISP012": "Shop.Zhang@123.com",
-    "ISP011": "15710023568",
-    "ISP003": "1990-01-01T00:00:00.000Z"
+    "PH003": "1990-01-01T00:00:00.000Z"
   },
+  "policyInsuredPeople": [
+    {
+      "ISP001": "Shop.Zhang",
+      "ISP004": "1",
+      "ISP005": "132456199001011234",
+      "ISP012": "Shop.Zhang@123.com",
+      "ISP011": "15710023568",
+      "ISP003": "1990-01-01T00:00:00.000Z"
+    }
+  ],
   "insuredObjects": [
     {
       "name": "标的相关信息",
