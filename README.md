@@ -20,21 +20,17 @@ Content-Type: application/json
 Cache-Control: no-cache
 
 {
-  "channelId": 100003,
+  "channelCode": 100003,
   "productId": "UbwoOpjMjt:1",
-  "company": "安盛天平",
-  "country": "cn",
   "effectiveDate": "2015-07-16T03:07:53.970Z",
   "expiredDate": "2016-07-15T03:07:53.970Z",
   "campaigns": [
     {
-      "id": 100000,
+      "code": "campaign_1",
       "voucher": "abcdef"
     }
   ],
-  "factor_table": {
-    "effectiveDate": "2015-07-16T03:07:53.970Z",
-    "expiredDate": "2016-07-15T03:07:53.970Z",
+  "factorTable": {
     "P040": "2",
     "P041": "沪A6U615",
     "PH001": "Shop.Zhang",
@@ -51,51 +47,31 @@ Cache-Control: no-cache
     "ISP011": "15710023568",
     "ISP003": "1990-01-01T00:00:00.000Z"
   },
-  "calculationModel": {
-    "mode": "policy",
-    "insuredObjects": [
-      {
-        "name": "标的相关信息",
-        "code": "Veh_Owner",
-        "type": "Person",
-        "plan_code": "Plan_1",
-        "product_id": "UbwoOpjMjt:1",
-        "channel_id": 100003,
-        "factor_table": {
-          "effectiveDate": "2015-07-16T03:07:53.970Z",
-          "expiredDate": "2016-07-15T03:07:53.970Z",
-          "P040": "2",
-          "P041": "沪A6U615",
-          "PH001": "Shop.Zhang",
-          "PH005": 1,
-          "PH006": "132456199001011234",
-          "PH015": "Shop.Zhang@123.com",
-          "PH013": "15710023568",
-          "PH003": "1990-01-01T00:00:00.000Z",
-          "PL009": "PAID_BY_INSURER",
-          "ISP001": "Shop.Zhang",
-          "ISP004": "1",
-          "ISP005": "132456199001011234",
-          "ISP012": "Shop.Zhang@123.com",
-          "ISP011": "15710023568",
-          "ISP003": "1990-01-01T00:00:00.000Z",
-          "AOP_limitAmount_ACC_BUR_WEB": 100000,
-          "AOA_unitAmount_PEFF_G": 1000,
-          "AOA_numberOfUnit_PEFF_G": 1,
-          "AOA_unitType_PEFF_G": "件",
-          "AOA_maxUnitAmount_PEFF_G": 2000
-        },
-        "selection": {
-          "a58df1a5-1c80-441b-bd5b-7cb29418bfbe": true,
-          "8ddfce37-0e63-4039-beb3-9f62b7bfcd91": true,
-          "3ccb2ffd-cf17-4887-ac5f-1e5ed75d3216": true,
-          "83e39830-02a9-4f5e-9cf8-e211ad0cb4a6": true,
-          "28e8b1fe-4826-4db3-9279-d2379bf0b1ad": true,
-          "70d7a4e7-02e8-4321-98b9-5edc63f87a2e": true
-        }
+  "insuredObjects": [
+    {
+      "name": "标的相关信息",
+      "code": "Veh_Owner",
+      "type": "Person",
+      "plan_code": "Plan_1",
+      "factor_table": {
+        "P040": "2",
+        "P041": "沪A6U615",
+        "AOP_limitAmount_ACC_BUR_WEB": 100000,
+        "AOA_unitAmount_PEFF_G": 1000,
+        "AOA_numberOfUnit_PEFF_G": 1,
+        "AOA_unitType_PEFF_G": "件",
+        "AOA_maxUnitAmount_PEFF_G": 2000
+      },
+      "selection": {
+        "a58df1a5-1c80-441b-bd5b-7cb29418bfbe": true,
+        "8ddfce37-0e63-4039-beb3-9f62b7bfcd91": true,
+        "3ccb2ffd-cf17-4887-ac5f-1e5ed75d3216": true,
+        "83e39830-02a9-4f5e-9cf8-e211ad0cb4a6": true,
+        "28e8b1fe-4826-4db3-9279-d2379bf0b1ad": true,
+        "70d7a4e7-02e8-4321-98b9-5edc63f87a2e": true
       }
-    ]
-  }
+    }
+  ]
 }
 ```
 
@@ -151,21 +127,17 @@ HTTP请求内容：
 
 ```
 {
-  "channelId": 100003,
+  "channelCode": 100003,
   "productId": "UbwoOpjMjt:1",
-  "company": "安盛天平",
-  "country": "cn",
   "effectiveDate": "2015-07-16T03:07:53.970Z",
   "expiredDate": "2016-07-15T03:07:53.970Z",
   "campaigns": [
     {
-      "id": 100000,
+      "code": "campaign_1",
       "voucher": "abcdef"
     }
   ],
-  "factor_table": {
-    "effectiveDate": "2015-07-16T03:07:53.970Z",
-    "expiredDate": "2016-07-15T03:07:53.970Z",
+  "factorTable": {
     "P040": "2",
     "P041": "沪A6U615",
     "PH001": "Shop.Zhang",
@@ -182,51 +154,31 @@ HTTP请求内容：
     "ISP011": "15710023568",
     "ISP003": "1990-01-01T00:00:00.000Z"
   },
-  "calculationModel": {
-    "mode": "policy",
-    "insuredObjects": [
-      {
-        "name": "标的相关信息",
-        "code": "Veh_Owner",
-        "type": "Person",
-        "plan_code": "Plan_1",
-        "product_id": "UbwoOpjMjt:1",
-        "channel_id": 100003,
-        "factor_table": {
-          "effectiveDate": "2015-07-16T03:07:53.970Z",
-          "expiredDate": "2016-07-15T03:07:53.970Z",
-          "P040": "2",
-          "P041": "沪A6U615",
-          "PH001": "Shop.Zhang",
-          "PH005": 1,
-          "PH006": "132456199001011234",
-          "PH015": "Shop.Zhang@123.com",
-          "PH013": "15710023568",
-          "PH003": "1990-01-01T00:00:00.000Z",
-          "PL009": "PAID_BY_INSURER",
-          "ISP001": "Shop.Zhang",
-          "ISP004": "1",
-          "ISP005": "132456199001011234",
-          "ISP012": "Shop.Zhang@123.com",
-          "ISP011": "15710023568",
-          "ISP003": "1990-01-01T00:00:00.000Z",
-          "AOP_limitAmount_ACC_BUR_WEB": 100000,
-          "AOA_unitAmount_PEFF_G": 1000,
-          "AOA_numberOfUnit_PEFF_G": 1,
-          "AOA_unitType_PEFF_G": "件",
-          "AOA_maxUnitAmount_PEFF_G": 2000
-        },
-        "selection": {
-          "a58df1a5-1c80-441b-bd5b-7cb29418bfbe": true,
-          "8ddfce37-0e63-4039-beb3-9f62b7bfcd91": true,
-          "3ccb2ffd-cf17-4887-ac5f-1e5ed75d3216": true,
-          "83e39830-02a9-4f5e-9cf8-e211ad0cb4a6": true,
-          "28e8b1fe-4826-4db3-9279-d2379bf0b1ad": true,
-          "70d7a4e7-02e8-4321-98b9-5edc63f87a2e": true
-        }
+  "insuredObjects": [
+    {
+      "name": "标的相关信息",
+      "code": "Veh_Owner",
+      "type": "Person",
+      "plan_code": "Plan_1",
+      "factor_table": {
+        "P040": "2",
+        "P041": "沪A6U615",
+        "AOP_limitAmount_ACC_BUR_WEB": 100000,
+        "AOA_unitAmount_PEFF_G": 1000,
+        "AOA_numberOfUnit_PEFF_G": 1,
+        "AOA_unitType_PEFF_G": "件",
+        "AOA_maxUnitAmount_PEFF_G": 2000
+      },
+      "selection": {
+        "a58df1a5-1c80-441b-bd5b-7cb29418bfbe": true,
+        "8ddfce37-0e63-4039-beb3-9f62b7bfcd91": true,
+        "3ccb2ffd-cf17-4887-ac5f-1e5ed75d3216": true,
+        "83e39830-02a9-4f5e-9cf8-e211ad0cb4a6": true,
+        "28e8b1fe-4826-4db3-9279-d2379bf0b1ad": true,
+        "70d7a4e7-02e8-4321-98b9-5edc63f87a2e": true
       }
-    ]
-  }
+    }
+  ]
 }
 ```
 
