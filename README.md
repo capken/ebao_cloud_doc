@@ -14,7 +14,7 @@ ebao cloud目前所有的web服务API基于HTTP协议，同时使用JSON的格�
 询价API的http请求内容如下：
 
 ```
-POST /pa_web/api/policies/quotations?accessKey=TqlLeuUB1w&signature=a6e9c0014edee9378b233329d7045a6b HTTP/1.1
+POST /pa_web/api/policies/quotations?version=1&accessKey=TqlLeuUB1w&signature=a6e9c0014edee9378b233329d7045a6b HTTP/1.1
 Host: localhost:8090
 Content-Type: application/json
 Cache-Control: no-cache
@@ -119,7 +119,7 @@ Date: Thu, 16 Jul 2015 03:15:45 GMT
 
 ### 询价
 
-HTTP请求路径：**/pa_web/api/policies/quotations?accessKey=[ACCESS_KEY]&signature=[SIGNATURE]**
+HTTP请求路径：**/pa_web/api/policies/quotations?version=1&accessKey=[ACCESS_KEY]&signature=[SIGNATURE]**
 
 HTTP请求方法：**POST**
 
@@ -133,7 +133,6 @@ HTTP请求内容：
   "productId": "UbwoOpjMjt:1",
   "effectiveDate": "2015-07-16T03:07:53.970Z",
   "expiredDate": "2016-07-15T03:07:53.970Z",
-  "CBC_Flag": "Y",
   "campaigns": [
     {
       "code": "campaign_1",
@@ -191,7 +190,6 @@ HTTP请求内容：
 | productId | 字符串 | 需要询价的产品ID |
 | effectiveDate | 字符串 | 保单生效期 |
 | expiredDate | 字符串 | 保单失效期 |
-| CBC_Flag | 字符串 | 是否见费出单（Y:是，N:否） |
 | campaigns | 数组 | 选中的优惠活动 |
 | policyHolder | key-value | 保单持有人相关信息 |
 | policyInsuredPeople | 数组 | 所有的被保险人的相关信息 |
@@ -204,9 +202,9 @@ HTTP请求内容：
 | PH001 | 字符串 | 投保人姓名 |
 | PH003 | 字符串 | 投保人出生日期 |
 | PH005 | 整数 | 投保人证件类型（1:身份证，2:驾驶证，3:护照，4:军官证，5:出生证，6:其它） |
-| PH006 | 字符串 | 投保人证件号码 |
+| PH006 | 字符串 | 投保人证件号码 (校验：当证件类型为身份证（1）时，所录入号码的第7位至第14位需为日期)|
 | PH013 | 字符串 | 投保人手机号 |
-| PH015 | 字符串 | 投保人邮箱 |
+| PH015 | 字符串 | 投保人邮箱（校验：输入值中需包含@） |
 
 其中 policyInsuredPeople 中每个对象的相关属性
 
@@ -215,9 +213,9 @@ HTTP请求内容：
 | ISP001 | 字符串 | 被保险人姓名 |
 | ISP003 | 字符串 | 被保险人出生日期 |
 | ISP004 | 整数 | 被保险人证件类型（1:身份证，2:驾驶证，3:护照，4:军官证，5:出生证，6:其它） |
-| ISP005 | 字符串 | 被保险人证件号码 |
+| ISP005 | 字符串 | 被保险人证件号码 （校验：当证件类型为身份证（1）时，所录入号码的第7位至第14位需为日期）|
 | ISP011 | 字符串 | 被保险人手机号 |
-| ISP012 | 字符串 | 被保险人邮箱 |
+| ISP012 | 字符串 | 被保险人邮箱（校验：输入值中需包含@）|
 
 其中 campaigns 中每个对象的相关属性
 
@@ -269,19 +267,126 @@ HTTP请求内容：
 
 ### 出单
 
-HTTP请求路径：**/pa_web/api/policies/issuances?accessKey=[ACCESS_KEY]&signature=[SIGNATURE]**
+HTTP请求路径：**/pa_web/api/policies/issuances?version=1&accessKey=[ACCESS_KEY]&signature=[SIGNATURE]**
 
 HTTP请求方法：**POST**
 
 HTTP请求内容类型：**application/json**
 
-HTTP请求内容：出单请求内容和询价一致
+HTTP请求内容：
+```
+{
+  "channelCode": "AXA_TP",
+  "productId": "UbwoOpjMjt:1",
+  "effectiveDate": "2015-07-16T03:07:53.970Z",
+  "expiredDate": "2016-07-15T03:07:53.970Z",
+  "quotationNumber": "Q1507160000000010",
+  "campaigns": [
+    {
+      "code": "campaign_1",
+      "voucher": "abcdef"
+    }
+  ],
+  "policyHolder": {
+    "PH001": "Shop.Zhang",
+    "PH005": 1,
+    "PH006": "132456199001011234",
+    "PH015": "Shop.Zhang@123.com",
+    "PH013": "15710023568",
+    "PH003": "1990-01-01T00:00:00.000Z"
+  },
+  "policyInsuredPeople": [
+    {
+      "ISP001": "Shop.Zhang",
+      "ISP004": "1",
+      "ISP005": "132456199001011234",
+      "ISP012": "Shop.Zhang@123.com",
+      "ISP011": "15710023568",
+      "ISP003": "1990-01-01T00:00:00.000Z"
+    }
+  ],
+  "insuredObjects": [
+    {
+      "name": "标的相关信息",
+      "code": "Veh_Owner",
+      "type": "Person",
+      "plan_code": "Plan_1",
+      "factor_table": {
+        "P040": "2",
+        "P041": "沪A6U615",
+        "AOP_limitAmount_ACC_BUR_WEB": 100000,
+        "AOA_unitAmount_PEFF_G": 1000,
+        "AOA_numberOfUnit_PEFF_G": 1,
+        "AOA_unitType_PEFF_G": "件",
+        "AOA_maxUnitAmount_PEFF_G": 2000
+      },
+      "componentSelection": {
+        "Veh_Owner_Guard": true,
+        "ACC_BUR_WEB": true,
+        "ACC_DEATH": true,
+        "ACC_DIS": true,
+        "ACC_BURN": true
+      }
+    }
+  ]
+}
+```
+
+| 属性  | 类型 | 说明 |
+|:------------ |:---------------|:-----|
+| channelCode | 字符串 | 渠道的Code |
+| productId | 字符串 | 需要询价的产品ID |
+| effectiveDate | 字符串 | 保单生效期 |
+| expiredDate | 字符串 | 保单失效期 |
+| campaigns | 数组 | 选中的优惠活动 |
+| policyHolder | key-value | 保单持有人相关信息 |
+| policyInsuredPeople | 数组 | 所有的被保险人的相关信息 |
+| insuredObjects | 数组 | 所有的被保对象的相关信息 |
+
+其中 policyHolder 对象的相关属性
+
+| 属性  | 类型 | 说明 |
+|:------------ |:---------------|:-----|
+| PH001 | 字符串 | 投保人姓名 |
+| PH003 | 字符串 | 投保人出生日期 |
+| PH005 | 整数 | 投保人证件类型（1:身份证，2:驾驶证，3:护照，4:军官证，5:出生证，6:其它） |
+| PH006 | 字符串 | 投保人证件号码（校验：当证件类型为身份证（1）时，所录入号码的第7位至第14位需为日期）|
+| PH013 | 字符串 | 投保人手机号 |
+| PH015 | 字符串 | 投保人邮箱（校验：输入值中需包含@）|
+
+其中 policyInsuredPeople 中每个对象的相关属性
+
+| 属性  | 类型 | 说明 |
+|:------------ |:---------------|:-----|
+| ISP001 | 字符串 | 被保险人姓名 |
+| ISP003 | 字符串 | 被保险人出生日期 |
+| ISP004 | 整数 | 被保险人证件类型（1:身份证，2:驾驶证，3:护照，4:军官证，5:出生证，6:其它） |
+| ISP005 | 字符串 | 被保险人证件号码（校验：当证件类型为身份证（1）时，所录入号码的第7位至第14位需为日期）|
+| ISP011 | 字符串 | 被保险人手机号 |
+| ISP012 | 字符串 | 被保险人邮箱（校验：输入值中需包含@）|
+
+其中 campaigns 中每个对象的相关属性
+
+| 属性  | 类型 | 说明 |
+|:------------ |:---------------|:-----|
+| code | 字符串 | 优惠活动的Code |
+| voucher | 字符串 | 优惠码 |
+
+其中 insuredObjects 中每个对象的相关属性
+
+| 属性  | 类型 | 说明 |
+|:------------ |:---------------|:-----|
+| type | 字符串 | 被保对象的类型 |
+| plan_code | 字符串 | 被保对象选中的保险计划代码 |
+| factor_table | key-value | 被保对象相关的风险因子，不同产品的风险因子会不相同，需要参考产品说明添加所需的风险因子 |
+| componentSelection | key-value | 产品结构中选中的节点（Coverage或Coverage Group） |
 
 出单的返回结果
 
 ```
 {
-  "policyNumber": "PVeh_Owner_GuardA_TP15000000000106"
+  "policyNumber": "PVeh_Owner_GuardA_TP15000000000106",
+  "status":"EFFECTIVE"
 }
 ```
 
@@ -291,7 +396,7 @@ HTTP请求内容：出单请求内容和询价一致
 
 ### 退保
 
-HTTP请求路径：**/pa_web/api/endorsement/cancellation?accessKey=[ACCESS_KEY]&signature=[SIGNATURE]**
+HTTP请求路径：**/pa_web/api/endorsement/cancellation?version=1&accessKey=[ACCESS_KEY]&signature=[SIGNATURE]**
 
 HTTP请求方法：**POST**
 
