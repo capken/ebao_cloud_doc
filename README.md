@@ -394,7 +394,7 @@ HTTP请求内容：
 |:------------ |:---------------|:-----|
 | policyNumber | 字符串 | 出单后的保单号 |
 
-### 退保
+### 退保（出单前注销）
 
 HTTP请求路径：**/pa_web/api/endorsement/cancellation?version=1&accessKey=[ACCESS_KEY]&signature=[SIGNATURE]**
 
@@ -407,7 +407,7 @@ HTTP请求内容：
 ```
 {
   "policyNumber": "P106_B2C15000000003101",
-  "effectiveDate": "2015-01-01T07:31:29.738Z",
+  "channelCode": "CHANNEL01",
   "applicationDate": "2015-01-01T07:31:29.738Z",
   "applicationType": "APLY_BY_INSURER"
 }
@@ -416,7 +416,7 @@ HTTP请求内容：
 | 属性  | 类型 | 说明 |
 |:------------ |:---------------|:-----|
 | policyNumber | 字符串 | 保单号 |
-| effectiveDate | 字符串 | 退保起始日期 |
+| channelCode | 字符串 | 渠道代码 |
 | applicationDate | 字符串 | 退保申请日期 |
 | applicationType | 字符串 | 退保申请类型（APLY_BY_INSURER:由保险公司申请，APLY_BY_POLICY_HOLDER:由投保人申请，APLY_BY_UNDERWRITER:由核保专员申请）|
 
